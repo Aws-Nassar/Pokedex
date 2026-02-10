@@ -1,10 +1,10 @@
-import {CLICommand} from "./command.js";
+import {State} from "./state.js";
 
 // help callback function 
-export function commandHelp(commands: Record<string, CLICommand>) {
+export function commandHelp(state: State) {
     console.log("Welcome to the Pokedex!\nUsage:\n");
-    const cmdValues = Object.values(commands);
-    for (const cmd of Object.values(commands)) {
+    const cmdValues = Object.values(state.commands);
+    for (const cmd of Object.values(cmdValues)) {
         console.log(`${cmd.name}: ${cmd.description}`);
     }
 }
