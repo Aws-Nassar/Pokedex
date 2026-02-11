@@ -10,7 +10,7 @@ export function cleanInput(input: string): string[] {
 
 export function startREPL(state: State) {
     state.readline.prompt();
-    state.readline.on("line", (input) => {
+    state.readline.on("line", async (input) => {
         const words = cleanInput(input);
         if (words.length === 0)
         {
@@ -20,7 +20,7 @@ export function startREPL(state: State) {
         const cmd = state.commands[words[0]];
         if (cmd) {
             try{
-                cmd.callback(state);
+                await cmd.callback(state);
             } catch (err) {
                 console.log(`Error Occuaredd: ${err}`);
             }
