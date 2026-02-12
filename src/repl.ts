@@ -1,7 +1,3 @@
-import { exit } from "node:process";
-import readline from "node:readline";
-import {getCommands} from "./commands.js";
-import { get } from "node:http";
 import { State } from "./state.js";
 
 export function cleanInput(input: string): string[] {
@@ -20,7 +16,7 @@ export function startREPL(state: State) {
         const cmd = state.commands[words[0]];
         if (cmd) {
             try{
-                await cmd.callback(state);
+                await cmd.callback(state, ...words.slice(1));
             } catch (err) {
                 console.log(`Error Occuaredd: ${err}`);
             }
