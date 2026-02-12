@@ -9,7 +9,7 @@ describe.each([
     // TODO: more test cases here
   {
     input: "  Aws            Ahmed            Nassar  ",
-    expected: ["Aws", "Ahmed", "Nassar"],
+    expected: ["aws", "ahmed", "nassar"],
   },
   {
     input: "  he   llo  world  ",

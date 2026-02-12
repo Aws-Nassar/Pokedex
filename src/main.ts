@@ -3,8 +3,8 @@ import { startREPL } from "./repl.js";
 import { initState, State } from "./state.js";
 
 function main() {
-  let state: State = initState();
+  let state: State = initState(500);
   startREPL(state);
 }
 
-main();
+main(); 
