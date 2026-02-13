@@ -24,34 +24,55 @@ export class PokeAPI {
         throw new Error(`Response status: ${response.status}`);
       }
 
-    const locations: ShallowLocations = await response.json();
-    this.cache.add(pageURL, locations);
-    return locations;
-
+      const locations: ShallowLocations = await response.json();
+      this.cache.add(pageURL, locations);
+      return locations;
     } catch (err) {
-      throw new Error(`Error: ${err}`);
+      const msg = err instanceof Error ? err.message : String(err);
+      throw new Error(msg);
     }
   }
 
   async fetchLocation(locationName: string): Promise<Location> {
-  const url = `${PokeAPI.baseURL}/location-area/${locationName}`;
-  const cached = this.cache.get<Location>(url);
+    const url = `${PokeAPI.baseURL}/location-area/${locationName}`;
+    const cached = this.cache.get<Location>(url);
     
-  if (cached) 
-      return cached;
-  
-  try {
+    if (cached) 
+        return cached;
+    
+    try {
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }
-
-    const locationInfo: Location = await response.json();
-    this.cache.add(url, locationInfo);
-    return locationInfo;
-
+      const locationInfo: Location = await response.json();
+      this.cache.add(url, locationInfo);
+      return locationInfo;
     } catch (err) {
-      throw new Error(`Error: ${err}`);
+      const msg = err instanceof Error ? err.message : String(err);
+      throw new Error(msg);
+    }
+  }
+  
+  async fetchPokemon(pokemonName: string): Promise<Pokemon> {
+    const safeName = encodeURIComponent(pokemonName.trim().toLowerCase());
+    const url = `${PokeAPI.baseURL}/pokemon/${safeName}`;
+    const cached = this.cache.get<Pokemon>(url);
+    
+    if (cached) 
+        return cached;
+    
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+      const PokemonInfo: Pokemon = await response.json();
+      this.cache.add(url, PokemonInfo);
+      return PokemonInfo;
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      throw new Error(msg);
     }
   }
 }
@@ -74,4 +95,9 @@ export type Location = {
       name: string;
     };
   }[];
+};
+
+export type Pokemon = {
+  name: string;
+  base_experience: number;
 };
