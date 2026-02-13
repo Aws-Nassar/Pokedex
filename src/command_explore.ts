@@ -1,4 +1,4 @@
-import {State } from "./state.js";
+import {State} from "./state.js";
 
 //explore call back function
 export async function commandExplore(state: State, ...args: string[]): Promise<void> {

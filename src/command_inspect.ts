@@ -1,5 +1,4 @@
-import { types } from "node:util";
-import {State } from "./state.js";
+import {State} from "./state.js";
 
 //catch call back function
 export async function commandInspect(state: State, ...args: string[]): Promise<void> {
@@ -34,6 +33,4 @@ export async function commandInspect(state: State, ...args: string[]): Promise<v
     for (const typee of pokemonInfo.types) {
         console.log(`  -${typee.type.name}`);
     }
-
-
 }

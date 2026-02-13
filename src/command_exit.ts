@@ -1,4 +1,4 @@
-import {State } from "./state.js";
+import {State} from "./state.js";
 
 //exit call back function
 export async function commandExit(state: State): Promise<void> {

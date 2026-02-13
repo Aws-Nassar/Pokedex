@@ -1,4 +1,4 @@
-import {State } from "./state.js";
+import {State} from "./state.js";
 
 //catch call back function
 export async function commandCatch(state: State, ...args: string[]): Promise<void> {
@@ -29,6 +29,7 @@ export async function commandCatch(state: State, ...args: string[]): Promise<voi
     {
         state.pokedex[args[0]] = pokemonInfo;
         console.log(`${args[0]} was caught!`);
+        console.log("You may now inspect it with the inspect command.");
         return;
     }
 
